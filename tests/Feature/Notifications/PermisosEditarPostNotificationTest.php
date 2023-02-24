@@ -31,15 +31,12 @@ class PermisosEditarPostNotificationTest extends TestCase
         return User::factory()->create();
     }
 
-    public function test_notificacion_email_lector_para_poder_editar_post_solicitado_mediante_un_token()
+    public function test_crear_permiso_editar_post_aprobada_con_exito()
     {
-        Notification::fake(); 
-
-        Queue::fake();
 
         Post::withoutEvents(function () {
 
-            $post = Post::factory(1)
+            Post::factory(1)
                 ->state(['creado_por' => $this->user->id,])
                 ->create()
                 ->each(function($post) {
@@ -50,12 +47,9 @@ class PermisosEditarPostNotificationTest extends TestCase
                             'estado' => PermisosEdicionPost::ESTADO_APROBADO
                         ]);
 
-
                     $this->assertTrue($post_permiso->esta_aprobado());
 
                 });
-
-
         });
 
     }

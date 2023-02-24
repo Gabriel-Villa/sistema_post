@@ -49,8 +49,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
 
 <script>
+
+    @can(Auth::user()->hasRole('Administrador'))
+
+        Echo.channel('nueva-solicitud-edicion-post')
+            .listen('NotificacionNuevoPermisoEdicionPostEvent', async ({body}) => {
+                console.log("NotificacionNuevoPermisoEdicionPostEvent ", body);
+                if (body) {
+                    notificacion(body);
+                    await hablar(body);
+                }
+            });
+            
+    @endcan
+
     Echo.private('notificacion.{{ auth()->id() }}')
         .listen('ImagenesProcesadasEvent', async ({body}) => {
+            console.log("ImagenesProcesadasEvent ", body);
             if(body){
                 notificacion(body);
                 await hablar(body);

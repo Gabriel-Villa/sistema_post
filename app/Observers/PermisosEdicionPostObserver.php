@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Events\NotificacionNuevoPermisoEdicionPostEvent;
 use App\Jobs\PermitirEdicionPostLectorJob;
 use App\Models\PermisosEdicionPost;
 use App\Notifications\PermisosEditarPostNotification;
@@ -10,6 +11,18 @@ use Log;
 class PermisosEdicionPostObserver
 {
     
+    /**
+     * Handle the PermisosEdicionPost "created" event.
+     *
+     * @param  \App\Models\PermisosEdicionPost  $permisosEdicionPost
+     * @return void
+     */
+    
+    public function created(PermisosEdicionPost $permisosEdicionPost)
+    {
+        event(new NotificacionNuevoPermisoEdicionPostEvent($permisosEdicionPost));
+    }
+
     /**
      * Handle the PermisosEdicionPost "updated" event.
      *

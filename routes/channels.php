@@ -8,7 +8,7 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 });
 
 Broadcast::channel('notificacion.administradores', function ($user) {
-    return true;
+    return $user->hasRole('Administrador') ? true : false;
 });
 
 Broadcast::channel('notificacion.{userId}', function ($user, $userId) {

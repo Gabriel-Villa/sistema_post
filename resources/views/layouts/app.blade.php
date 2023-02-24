@@ -50,8 +50,11 @@
 
 <script>
     Echo.private('notificacion.{{ auth()->id() }}')
-        .listen('ImagenesProcesadasEvent', async (e) => {
-            console.log(e);
+        .listen('ImagenesProcesadasEvent', async ({body}) => {
+            if(body){
+                notificacion(body);
+                await hablar(body);
+            }
         });
 
     const notificaciones = document.querySelectorAll('.marcar-como-leido');

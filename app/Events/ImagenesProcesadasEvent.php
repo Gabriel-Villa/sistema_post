@@ -44,7 +44,7 @@ class ImagenesProcesadasEvent implements ShouldBroadcast
     public function broadcastWith()
     {
         return [
-            'body' => "Hola",
+            'body' => "Tu archivo termino de procesarse",
         ];
     }
 

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
     <!-- Toastify css -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/toastify/min.css') }}">
     
     <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/helpHttp.js') }}" type="module"></script>
@@ -44,9 +44,9 @@
 
 
 <!-- Toastify js -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script type="text/javascript" src="{{ asset('plugins/toastify/main.js') }}"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+<script src="{{ asset('plugins/flowbite/min.js') }}"></script>
 
 <script>
 
@@ -64,7 +64,7 @@
     @endcan
 
     Echo.private('notificacion.{{ auth()->id() }}')
-        .listen('ImagenesProcesadasEvent', async ({body}) => {
+        .listen('ImagenesProcesadasEvent', async ({body}) => {/
             console.log("ImagenesProcesadasEvent ", body);
             if(body){
                 notificacion(body);

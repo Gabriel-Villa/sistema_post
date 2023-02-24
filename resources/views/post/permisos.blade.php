@@ -5,7 +5,7 @@
             role="tablist">
             <li class="mr-2" role="presentation">
                 <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab" data-tabs-target="#profile"
-                    type="button" role="tab" aria-controls="profile" aria-selected="false">Permisos</button>
+                    type="button" role="tab" aria-controls="profile" aria-selected="false">Solicitudes Nuevas</button>
             </li>
         </ul>
     </div>
@@ -51,7 +51,7 @@
                 </div>
 
             @empty
-                <p>Sin solicitudes pendientes !</p>
+                <p>Sin nuevas solicitudes !</p>
             @endforelse
         </div>
     </div>

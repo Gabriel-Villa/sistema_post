@@ -44,6 +44,11 @@ class Post extends Model
         return $this->hasMany(PostImagenes::class, 'post_id', 'id');
     }
 
+    public function permiso()
+    {
+        return $this->hasMany(PermisosEdicionPost::class, 'post_id', 'id');
+    }
+
     // Mutaciones
     public function setNombreAttribute($value)
     {

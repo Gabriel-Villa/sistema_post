@@ -4,6 +4,7 @@ namespace Tests\Feature\Notifications;
 
 use App\Models\PermisosEdicionPost;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Notification;
@@ -34,21 +35,26 @@ class PermisosEditarPostNotificationTest extends TestCase
     {
         Notification::fake(); 
 
+        Queue::fake();
+
         Post::withoutEvents(function () {
 
             $post = Post::factory(1)
-            ->state(['creado_por' => $this->user->id,])
-            ->create()
-            ->each(function($post) {
-                $post->detalle()
-                    ->create([
-                        'post_id' => $post->id,
-                        'solicitado_por' => $this->user->id,
-                        'estado' => PermisosEdicionPost::ESTADO_APROBADO
-                    ]);
-            });
+                ->state(['creado_por' => $this->user->id,])
+                ->create()
+                ->each(function($post) {
+                    $post_permiso = $post->permiso()
+                        ->create([
+                            'post_id' => $post->id,
+                            'solicitado_por' => $this->user->id,
+                            'estado' => PermisosEdicionPost::ESTADO_APROBADO
+                        ]);
 
-            // $this->assertTrue(true, $post->);
+
+                    $this->assertTrue($post_permiso->esta_aprobado());
+
+                });
+
 
         });
 

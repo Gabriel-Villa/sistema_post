@@ -2,11 +2,11 @@
 
 namespace App\Observers;
 
+use App\Events\NotificacionEstadoSolicitudEdicionPostEvent;
 use App\Events\NotificacionNuevoPermisoEdicionPostEvent;
 use App\Jobs\PermitirEdicionPostLectorJob;
 use App\Models\PermisosEdicionPost;
 use App\Notifications\PermisosEditarPostNotification;
-use Log;
 
 class PermisosEdicionPostObserver
 {
@@ -34,6 +34,14 @@ class PermisosEdicionPostObserver
         if($permisosEdicionPost->esta_aprobado())
         {
             $permisosEdicionPost->solicitadopor->notify(new PermisosEditarPostNotification($permisosEdicionPost));
+
+            event(new NotificacionEstadoSolicitudEdicionPostEvent($permisosEdicionPost, 'Tu solicitud para editar el post fue aprobada'));
+
+        }
+
+        if($permisosEdicionPost->esta_rechazada())
+        {
+            event(new NotificacionEstadoSolicitudEdicionPostEvent($permisosEdicionPost, 'Tu solicitud para editar el post fue rechazada'));
         }
 
         if($permisosEdicionPost->esta_en_curso())

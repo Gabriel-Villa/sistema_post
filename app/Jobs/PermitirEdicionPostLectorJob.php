@@ -33,6 +33,8 @@ class PermitirEdicionPostLectorJob implements ShouldQueue, ShouldBeUnique
      */
     public function handle()
     {
+        Log::error("Se acabo el tiempo");
+        
         $this->permisosEdicionPost->update(['estado' => PermisosEdicionPost::ESTADO_FINALIZADO]);
     }
 }

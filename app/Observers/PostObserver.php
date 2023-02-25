@@ -42,9 +42,14 @@ class PostObserver
     {
         activity()->log('Actualizo un post');
 
-        $jobs = $this->postImagenService->retornarJobs($post);
+        if(request()->hasFile('post_file'))
+        {
+            $jobs = $this->postImagenService->retornarJobs($post);
+    
+            $this->postImagenService->despacharJobs($jobs, $post);
 
-        $this->postImagenService->despacharJobs($jobs, $post);
+        }
+
     }
 
     /**

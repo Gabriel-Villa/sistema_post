@@ -79,6 +79,11 @@ class PermisosEdicionPost extends Model
         return $this->estado == Self::ESTADO_EN_CURSO;
     }
 
+    public function esta_rechazada()
+    {
+        return $this->estado == Self::ESTADO_RECHAZADO;
+    }
+
     public function getEstadoRechazadoAttribute($value)
     {
         return Self::ESTADO_RECHAZADO;

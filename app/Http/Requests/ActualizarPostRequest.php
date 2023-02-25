@@ -38,7 +38,7 @@ class ActualizarPostRequest extends FormRequest
         
         return [
             'nombre' => 'required|max:200|unique:posts,nombre,'.$this->post->id,
-            'post_file' => 'required|array|min:1|max:10'
+            'post_file' => 'nullable|array|min:1|max:10'
         ];
     }
 }

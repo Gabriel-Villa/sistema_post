@@ -22,7 +22,13 @@ class PostExport implements FromCollection, WithHeadings, ShouldAutoSize, WithEv
 
     public function headings(): array
     {
-        return array_keys($this->collection()->first()->toArray());
+        $firstRow = $this->collection()->first();
+
+        if ($firstRow === null) {
+            return [];
+        }
+    
+        return array_keys($firstRow->toArray());
     }
 
     /**

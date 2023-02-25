@@ -55,21 +55,24 @@
         Echo.channel('nueva-solicitud-edicion-post')
             .listen('NotificacionNuevoPermisoEdicionPostEvent', async ({body}) => {
                 console.log("NotificacionNuevoPermisoEdicionPostEvent ", body);
-                if (body) {
-                    notificacion(body);
-                    await hablar(body);
-                }
+                notificacion(body);
+                await hablar(body);
             });
             
     @endcan
 
     Echo.private('notificacion.{{ auth()->id() }}')
-        .listen('ImagenesProcesadasEvent', async ({body}) => {/
+        .listen('NotificacionEstadoSolicitudEdicionPostEvent', async ({body}) => {
+            console.log("NotificacionEstadoSolicitudEdicionPostEvent ", body);
+            notificacion(body);
+            await hablar(body);
+        });
+
+    Echo.private('notificacion.{{ auth()->id() }}')
+        .listen('ImagenesProcesadasEvent', async ({body}) => {
             console.log("ImagenesProcesadasEvent ", body);
-            if(body){
-                notificacion(body);
-                await hablar(body);
-            }
+            notificacion(body);
+            await hablar(body);
         });
 
     const notificaciones = document.querySelectorAll('.marcar-como-leido');
